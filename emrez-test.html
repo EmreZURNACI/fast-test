@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>emrezurnaci</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      background: linear-gradient(
+        135deg,
+        #ff4d4d,
+        #ffcc00,
+        #33ccff,
+        #9933ff,
+        #00ff99
+      );
+      background-size: 400% 400%;
+      animation: renkler 10s ease infinite;
+    }
+
+    @keyframes renkler {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .kart {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      color: white;
+      box-shadow: 0 0 25px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      margin: 0 0 15px;
+      font-size: 42px;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 12px 20px;
+      border-radius: 12px;
+      background: white;
+      color: #333;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    a:hover {
+      transform: scale(1.08);
+      background: #ffe066;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="kart">
+    <h1>emrezurnaci</h1>
+    <p>Renkli mini HTML sayfası 🎨</p>
+
+    <a href="/rastgele-yol">
+      Path'e Git
+    </a>
+  </div>
+
+</body>
+</html>
