@@ -1,102 +1,73 @@
-from flask import Flask
+import streamlit as st
 import random
 
-app = Flask(__name__)
+st.set_page_config(
+    page_title="emrezurnaci",
+    page_icon="🎨",
+    layout="centered"
+)
 
 # Rastgele renk üret
 def random_color():
     return "#{:06x}".format(random.randint(0, 0xFFFFFF))
 
+c1 = random_color()
+c2 = random_color()
+c3 = random_color()
 
-@app.route("/")
-def home():
-    bg1 = random_color()
-    bg2 = random_color()
-    bg3 = random_color()
+# CSS
+st.markdown(
+    f"""
+    <style>
+    .stApp {{
+        background: linear-gradient(135deg, {c1}, {c2}, {c3});
+        background-size: 400% 400%;
+        animation: gradient 10s ease infinite;
+    }}
 
-    return f"""
-    <!DOCTYPE html>
-    <html lang="tr">
-    <head>
-        <meta charset="UTF-8">
-        <title>emrezurnaci</title>
+    @keyframes gradient {{
+        0% {{ background-position: 0% 50%; }}
+        50% {{ background-position: 100% 50%; }}
+        100% {{ background-position: 0% 50%; }}
+    }}
 
-        <style>
-            body {{
-                margin: 0;
-                height: 100vh;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                font-family: Arial, sans-serif;
-                overflow: hidden;
+    .box {{
+        background: rgba(255,255,255,0.15);
+        padding: 40px;
+        border-radius: 20px;
+        text-align: center;
+        margin-top: 120px;
+        backdrop-filter: blur(10px);
+        color: white;
+        box-shadow: 0 0 25px rgba(0,0,0,0.3);
+    }}
 
-                background: linear-gradient(
-                    135deg,
-                    {bg1},
-                    {bg2},
-                    {bg3}
-                );
+    .btn {{
+        display: inline-block;
+        margin-top: 20px;
+        padding: 12px 20px;
+        border-radius: 12px;
+        background: white;
+        color: black;
+        text-decoration: none;
+        font-weight: bold;
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
-                background-size: 400% 400%;
-                animation: renkler 8s ease infinite;
-            }}
-
-            @keyframes renkler {{
-                0% {{ background-position: 0% 50%; }}
-                50% {{ background-position: 100% 50%; }}
-                100% {{ background-position: 0% 50%; }}
-            }}
-
-            .kart {{
-                background: rgba(255,255,255,0.15);
-                padding: 40px;
-                border-radius: 20px;
-                color: white;
-                text-align: center;
-                backdrop-filter: blur(10px);
-                box-shadow: 0 0 25px rgba(0,0,0,0.3);
-            }}
-
-            a {{
-                display: inline-block;
-                margin-top: 15px;
-                padding: 12px 20px;
-                background: white;
-                color: black;
-                text-decoration: none;
-                border-radius: 12px;
-                font-weight: bold;
-            }}
-
-            a:hover {{
-                transform: scale(1.05);
-            }}
-        </style>
-    </head>
-
-    <body>
-        <div class="kart">
-            <h1>emrezurnaci 🚀</h1>
-            <p>Flask ile çalışan random renkli sayfa</p>
-
-            <a href="/random-path">
-                Random Path
-            </a>
-        </div>
-    </body>
-    </html>
+# Ana içerik
+st.markdown(
     """
+    <div class="box">
+        <h1>emrezurnaci 🚀</h1>
+        <p>Streamlit üzerinde çalışan random renkli sayfa</p>
 
-
-@app.route("/random-path")
-def random_path():
-    return """
-    <h1 style='font-family:Arial'>
-        Burası random path 😄
-    </h1>
-    """
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
+        <a class="btn" href="/random-path">
+            Random Path
+        </a>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
