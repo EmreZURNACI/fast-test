@@ -1,80 +1,102 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>emrezurnaci</title>
+from flask import Flask
+import random
 
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
-      background: linear-gradient(
-        135deg,
-        #ff4d4d,
-        #ffcc00,
-        #33ccff,
-        #9933ff,
-        #00ff99
-      );
-      background-size: 400% 400%;
-      animation: renkler 10s ease infinite;
-    }
+app = Flask(__name__)
 
-    @keyframes renkler {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+# Rastgele renk üret
+def random_color():
+    return "#{:06x}".format(random.randint(0, 0xFFFFFF))
 
-    .kart {
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(10px);
-      padding: 40px;
-      border-radius: 20px;
-      text-align: center;
-      color: white;
-      box-shadow: 0 0 25px rgba(0,0,0,0.2);
-    }
 
-    h1 {
-      margin: 0 0 15px;
-      font-size: 42px;
-    }
+@app.route("/")
+def home():
+    bg1 = random_color()
+    bg2 = random_color()
+    bg3 = random_color()
 
-    a {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 12px 20px;
-      border-radius: 12px;
-      background: white;
-      color: #333;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-    }
+    return f"""
+    <!DOCTYPE html>
+    <html lang="tr">
+    <head>
+        <meta charset="UTF-8">
+        <title>emrezurnaci</title>
 
-    a:hover {
-      transform: scale(1.08);
-      background: #ffe066;
-    }
-  </style>
-</head>
-<body>
+        <style>
+            body {{
+                margin: 0;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: Arial, sans-serif;
+                overflow: hidden;
 
-  <div class="kart">
-    <h1>emrezurnaci</h1>
-    <p>Renkli mini HTML sayfası 🎨</p>
+                background: linear-gradient(
+                    135deg,
+                    {bg1},
+                    {bg2},
+                    {bg3}
+                );
 
-    <a href="/rastgele-yol">
-      Path'e Git
-    </a>
-  </div>
+                background-size: 400% 400%;
+                animation: renkler 8s ease infinite;
+            }}
 
-</body>
-</html>
+            @keyframes renkler {{
+                0% {{ background-position: 0% 50%; }}
+                50% {{ background-position: 100% 50%; }}
+                100% {{ background-position: 0% 50%; }}
+            }}
+
+            .kart {{
+                background: rgba(255,255,255,0.15);
+                padding: 40px;
+                border-radius: 20px;
+                color: white;
+                text-align: center;
+                backdrop-filter: blur(10px);
+                box-shadow: 0 0 25px rgba(0,0,0,0.3);
+            }}
+
+            a {{
+                display: inline-block;
+                margin-top: 15px;
+                padding: 12px 20px;
+                background: white;
+                color: black;
+                text-decoration: none;
+                border-radius: 12px;
+                font-weight: bold;
+            }}
+
+            a:hover {{
+                transform: scale(1.05);
+            }}
+        </style>
+    </head>
+
+    <body>
+        <div class="kart">
+            <h1>emrezurnaci 🚀</h1>
+            <p>Flask ile çalışan random renkli sayfa</p>
+
+            <a href="/random-path">
+                Random Path
+            </a>
+        </div>
+    </body>
+    </html>
+    """
+
+
+@app.route("/random-path")
+def random_path():
+    return """
+    <h1 style='font-family:Arial'>
+        Burası random path 😄
+    </h1>
+    """
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
