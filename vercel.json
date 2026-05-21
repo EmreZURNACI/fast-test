@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/go",
+      "destination": "https://google.com",
+      "permanent": false
+    }
+  ]
+}
